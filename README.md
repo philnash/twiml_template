@@ -54,7 +54,7 @@ And then add your TwiML view:
   twiml.Say "Hello #{@name}"
 ```
 
-Save the file as `#{RAILS_ROOT}/app/controller/voice/index.twiml`.
+Save the file as `#{RAILS_ROOT}/app/views/voice/index.twiml`.
 
 Run the app using `rails s` and visit [http://localhost:3000/voice](http://localhost:3000/voice) and you will see:
 
