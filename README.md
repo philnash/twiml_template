@@ -4,7 +4,7 @@
 
 An easy way to work with TwiML for responding to [Twilio](http://twilio.com) webhooks in Rails or Sinatra applications using template files.
 
-[![Build Status](https://travis-ci.org/philnash/twiml_template.svg)](https://travis-ci.org/philnash/twiml_template)[![Code Climate](https://codeclimate.com/github/philnash/twiml_template/badges/gpa.svg)](https://codeclimate.com/github/philnash/twiml_template)
+[![Build Status](https://travis-ci.org/philnash/twiml_template.svg)](https://travis-ci.org/philnash/twiml_template) [![Code Climate](https://codeclimate.com/github/philnash/twiml_template/badges/gpa.svg)](https://codeclimate.com/github/philnash/twiml_template)
 
 ## Installation
 

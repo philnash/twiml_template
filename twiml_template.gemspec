@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version  = '>= 1.9.3'
 
   spec.add_dependency "tilt", ">= 1.3", "< 2.0"
-  spec.add_dependency "twilio-ruby", "~> 3.0"
+  spec.add_dependency "twilio-ruby", ">= 3.0", "< 5.0"
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
