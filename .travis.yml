@@ -12,6 +12,11 @@ rvm:
   - 2.3.1
   - jruby-19mode
   - rbx-3
+  - ruby-head
+matrix:
+  allow_failures:
+  - rvm: rbx-3
+  - rvm: ruby-head
 addons:
   apt:
     packages:
