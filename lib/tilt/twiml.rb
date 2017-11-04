@@ -9,7 +9,7 @@ module Tilt
 
     def evaluate(scope, locals, &block)
       return super(scope, locals, &block) if data.respond_to?(:to_str)
-      twiml = ::Twilio::TwiML::Response.new do |response|
+      twiml = ::TwimlTemplate::Response.new do |response|
         data.call(response)
       end.to_xml
     end
@@ -20,7 +20,7 @@ module Tilt
 
     def precompiled_preamble(locals)
       return super if locals.include? :twiml
-      "::Twilio::TwiML::Response.new do |twiml|\n#{super}"
+      "::TwimlTemplate::Response.new do |twiml|\n#{super}"
     end
 
     def precompiled_postamble(locals)

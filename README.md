@@ -2,9 +2,28 @@
 
 [TwiML](https://www.twilio.com/docs/api/twiml) templates for Tilt.
 
-An easy way to work with TwiML for responding to [Twilio](http://twilio.com) webhooks in Rails or Sinatra applications using template files.
+An easy way to work with TwiML for responding to [Twilio](http://twilio.com) webhooks in Rails or Sinatra applications using template files with a `.twiml` extension.
 
 [![Build Status](https://travis-ci.org/philnash/twiml_template.svg)](https://travis-ci.org/philnash/twiml_template) [![Code Climate](https://codeclimate.com/github/philnash/twiml_template/badges/gpa.svg)](https://codeclimate.com/github/philnash/twiml_template)
+
+## Example
+
+If you create a template called `hello_world.twiml` with the following code:
+
+```ruby
+twiml.say("Hello World!")
+```
+
+and rendered it from an application you would get the following response:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say>Hello World!</Say>
+</Response>
+```
+
+See [Rails](#rails) or [Sinatra](#sinatra) below for full instructions.
 
 ## Installation
 
@@ -16,13 +35,17 @@ gem 'twiml_template'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
     $ gem install twiml_template
 
 ## Usage
+
+`twiml_template` allows you to use a template with the extension `.twiml` to write TwiML. The template makes a single variable, `twiml` available. `twiml` is an instance of a `TwimlTemplate::Response` which unifies the `twilio-ruby` gem's `Twilio::TwiML::VoiceResponse` and `Twilio::TwiML::MessagingResponse` classes. This means you only need one type of template file, but you can use it for either voice or messaging responses. `twiml_template` passes methods through to objects of each of those classes to generate the response.
+
+If you start writing a voice response, you can only continue writing a voice response. If you start writing a messaging response, you can only continue with a messaging response. This should never cause you a problem (you would never normally write a response with a `<Say>` and a `<Message>` in it!).
 
 ### Rails
 
@@ -51,7 +74,7 @@ end
 And then add your TwiML view:
 
 ```ruby
-  twiml.Say "Hello #{@name}"
+  twiml.say "Hello #{@name}"
 ```
 
 Save the file as `#{RAILS_ROOT}/app/views/voice/index.twiml`.
@@ -84,7 +107,7 @@ end
 And then add your TwiML view:
 
 ```ruby
-  twiml.Say "Hello #{@name}"
+  twiml.say "Hello #{@name}"
 ```
 
 Save the file as `#{APP_ROOT}/views/voice.twiml`.
