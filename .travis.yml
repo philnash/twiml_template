@@ -17,6 +17,7 @@ matrix:
   allow_failures:
   - rvm: rbx-3
   - rvm: ruby-head
+  - rvm: jruby-19mode
 addons:
   apt:
     packages:
