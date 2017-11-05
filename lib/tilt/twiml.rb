@@ -9,7 +9,7 @@ module Tilt
 
     def evaluate(scope, locals, &block)
       return super(scope, locals, &block) if data.respond_to?(:to_str)
-      twiml = ::TwimlTemplate::Response.new do |response|
+      ::TwimlTemplate::Response.new do |response|
         data.call(response)
       end.to_xml
     end
