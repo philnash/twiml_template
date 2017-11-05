@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'twiml_template/response'
 
 describe TwimlTemplate::Response do
-  let :response { TwimlTemplate::Response.new }
+  let(:response) { TwimlTemplate::Response.new }
 
   describe 'with a messaging response' do
     describe 'with a simple response' do
