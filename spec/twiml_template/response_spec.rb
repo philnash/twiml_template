@@ -63,7 +63,7 @@ describe TwimlTemplate::Response do
         response.to_xml.must_equal twiml
       end
 
-      [:say, :play, :dial, :gather, :pause, :enqueue, :hangup, :leave, :record, :redirect, :reject, :sms].each do |verb|
+      (TwimlTemplate::Response::MESSAGING_VERBS | TwimlTemplate::Response::VOICE_VERBS).each do |verb|
         it "responds to #{verb}" do
           response.must_respond_to(verb)
         end
