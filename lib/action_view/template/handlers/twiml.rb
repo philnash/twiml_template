@@ -3,9 +3,9 @@ require 'twilio-ruby'
 module ActionView
    module Template::Handlers
     class TwiML
-      def self.call(template)
+      def self.call(template, source = nil)
         "self.output_buffer = ::Twilio::TwiML::Response.new do |twiml|;" +
-        template.source +
+        (source || template.source) +
         ";end.to_xml;"
       end
     end
