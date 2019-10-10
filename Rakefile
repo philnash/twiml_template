@@ -7,5 +7,5 @@ desc 'Run tests (default)'
 Rake::TestTask.new(:spec) do |t|
   t.test_files = FileList['spec/**/*_spec.rb']
   t.ruby_opts = ['-Ispec']
-  t.ruby_opts << '-rubygems' if defined? Gem
+  t.ruby_opts << '-rrubygems' if defined? Gem
 end
