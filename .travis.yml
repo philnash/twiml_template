@@ -15,6 +15,7 @@ rvm:
   - rbx-3
 matrix:
   allow_failures:
+    - rvm: rbx-3
 addons:
   apt:
     packages:
