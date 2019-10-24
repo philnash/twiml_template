@@ -1,7 +1,7 @@
 module TwimlTemplate
   class Response
     MESSAGING_VERBS = [:message, :redirect]
-    VOICE_VERBS = [:say, :play, :dial, :gather, :pause, :enqueue, :hangup, :leave, :record, :redirect, :reject, :sms]
+    VOICE_VERBS = [:say, :play, :dial, :gather, :pause, :enqueue, :hangup, :leave, :record, :redirect, :reject, :sms, :connect, :autopilot, :pay, :start]
 
     def initialize
       @voice_response = Twilio::TwiML::VoiceResponse.new
