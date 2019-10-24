@@ -1,7 +1,7 @@
 language: ruby
 sudo: required
 dist: trusty
-before_install: gem install bundler
+before_install: gem install bundler --version 1.17.3
 install:
   - bundle install --retry=3
 cache: bundler
