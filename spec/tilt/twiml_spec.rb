@@ -9,17 +9,17 @@ describe Tilt::TwiML do
 
   describe 'simple rendering' do
     let :twiml_response do
-      "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>" \
-      "<Say>Hello World!</Say></Response>"
+      "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n" \
+      "<Say>Hello World!</Say>\n</Response>\n"
     end
 
     it "prepares and evaluates the template on #render" do
-      template = Tilt::TwiML.new { |t| "twiml.say 'Hello World!'" }
+      template = Tilt::TwiML.new { |t| "twiml.say message: 'Hello World!'" }
       template.render.must_equal twiml_response
     end
 
     it "can be rendered more than once" do
-      template = Tilt::TwiML.new { |t| "twiml.say 'Hello World!'" }
+      template = Tilt::TwiML.new { |t| "twiml.say message: 'Hello World!'" }
       3.times { template.render.must_equal twiml_response }
     end
   end
@@ -27,20 +27,20 @@ describe Tilt::TwiML do
   describe 'rendering with locals/scopes' do
 
     let :twiml_response do
-      "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>" \
-      "<Say>Hello Joe!</Say></Response>"
+      "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n" \
+      "<Say>Hello Joe!</Say>\n</Response>\n"
     end
 
     it "passes locals" do
       template = Tilt::TwiML.new do |t|
-        "twiml.say 'Hello ' + name + '!'"
+        "twiml.say message: 'Hello ' + name + '!'"
       end
       template.render(Object.new, :name => 'Joe').must_equal twiml_response
     end
 
     it "evaluates in an object scope" do
       template = Tilt::TwiML.new do |t|
-        "twiml.say 'Hello ' + @name + '!'"
+        "twiml.say message: 'Hello ' + @name + '!'"
       end
       scope = Object.new
       scope.instance_variable_set :@name, 'Joe'
@@ -49,7 +49,7 @@ describe Tilt::TwiML do
 
     it "passes a block for yield" do
       template = Tilt::TwiML.new do |t|
-        "twiml.say 'Hello ' + yield + '!'"
+        "twiml.say message: 'Hello ' + yield + '!'"
       end
       3.times { template.render { 'Joe' }.must_equal twiml_response }
     end
@@ -57,7 +57,7 @@ describe Tilt::TwiML do
     it "takes block style templates" do
       template =
         Tilt::TwiML.new do |t|
-          lambda { |twiml| twiml.say('Hello Joe!') }
+          lambda { |twiml| twiml.say(message: 'Hello Joe!') }
         end
       template.render.must_equal twiml_response
     end

@@ -11,7 +11,7 @@ An easy way to work with TwiML for responding to [Twilio](http://twilio.com) web
 If you create a template called `hello_world.twiml` with the following code:
 
 ```ruby
-twiml.say("Hello World!")
+twiml.say(message: "Hello World!")
 ```
 
 and rendered it from an application you would get the following response:
@@ -74,7 +74,7 @@ end
 And then add your TwiML view:
 
 ```ruby
-  twiml.say "Hello #{@name}"
+  twiml.say message: "Hello #{@name}"
 ```
 
 Save the file as `#{RAILS_ROOT}/app/views/voice/index.twiml`.

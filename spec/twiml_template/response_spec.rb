@@ -7,8 +7,8 @@ describe TwimlTemplate::Response do
   describe 'with a messaging response' do
     describe 'with a simple response' do
       let :twiml do
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>" \
-        "<Message>Hello World!</Message></Response>"
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n" \
+        "<Message>Hello World!</Message>\n</Response>\n"
       end
 
       it 'generates successfully' do
@@ -25,8 +25,8 @@ describe TwimlTemplate::Response do
 
     describe 'with a nested response' do
       let :twiml do
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>" \
-        "<Message><Body>Hello World!</Body></Message></Response>"
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n" \
+        "<Message>\n<Body>Hello World!</Body>\n</Message>\n</Response>\n"
       end
 
       it 'generates successfully' do
@@ -39,8 +39,8 @@ describe TwimlTemplate::Response do
 
     describe 'with multiple commands' do
       let :twiml do
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>" \
-        "<Message>Hello World!</Message><Redirect>http://example.com</Redirect></Response>"
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n" \
+        "<Message>Hello World!</Message>\n<Redirect>http://example.com</Redirect>\n</Response>\n"
       end
 
       it 'generates successfully' do
@@ -54,12 +54,12 @@ describe TwimlTemplate::Response do
   describe 'with a voice response' do
     describe 'with a simple response' do
       let :twiml do
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>" \
-        "<Say>Hello World!</Say></Response>"
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n" \
+        "<Say>Hello World!</Say>\n</Response>\n"
       end
 
       it 'generates successfully' do
-        response.say("Hello World!")
+        response.say(message: "Hello World!")
         response.to_xml.must_equal twiml
       end
 
@@ -72,13 +72,13 @@ describe TwimlTemplate::Response do
 
     describe 'with a nested response' do
       let :twiml do
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>" \
-        "<Gather><Say>Hello World!</Say></Gather></Response>"
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n" \
+        "<Gather>\n<Say>Hello World!</Say>\n</Gather>\n</Response>\n"
       end
 
       it 'generates successfully' do
         response.gather do |gather|
-          gather.say "Hello World!"
+          gather.say message: "Hello World!"
         end
         response.to_xml.must_equal twiml
       end
@@ -86,12 +86,12 @@ describe TwimlTemplate::Response do
 
     describe 'with multiple commands' do
       let :twiml do
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>" \
-        "<Say>Hello World!</Say><Play>http://tunes.com</Play></Response>"
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n" \
+        "<Say>Hello World!</Say>\n<Play>http://tunes.com</Play>\n</Response>\n"
       end
 
       it 'generates successfully' do
-        response.say("Hello World!")
+        response.say(message: "Hello World!")
         response.play(url: "http://tunes.com")
         response.to_xml.must_equal twiml
       end
@@ -101,7 +101,7 @@ describe TwimlTemplate::Response do
   describe 'with a mixed response' do
     it 'should raise an error' do
       proc do
-        response.say("Hello")
+        response.say(message: "Hello")
         response.message(" World!")
       end.must_raise ArgumentError
     end
@@ -116,7 +116,7 @@ describe TwimlTemplate::Response do
     it 'should allow a redirect and a voice verb' do
       proc do
         response.redirect("http://example.com")
-        response.say("Hello World!")
+        response.say(message: "Hello World!")
       end.must_be_silent
     end
   end
