@@ -18,12 +18,12 @@ describe Sinatra::TwiML do
   let(:app) { TwiMLApp }
 
   let :twiml_response do
-    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n" \
-    "<Say>Hello Joe!</Say>\n</Response>"
+    "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>" \
+    "<Say>Hello Joe!</Say></Response>"
   end
 
   it "renders simple template" do
     response = get("/hello")
-    response.body.strip.must_equal twiml_response
+    response.body.strip.must_be_equivalent_xml(twiml_response)
   end
 end

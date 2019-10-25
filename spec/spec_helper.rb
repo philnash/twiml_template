@@ -5,3 +5,4 @@ Bundler.setup
 
 require 'minitest/autorun'
 require 'minitest/mock'
+require_relative './custom_assertions.rb'
