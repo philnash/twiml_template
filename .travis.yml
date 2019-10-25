@@ -11,6 +11,7 @@ rvm:
   - 2.4
   - 2.5
   - 2.6
+  - ruby-head
   - jruby-18mode
   - jruby-19mode
   - jruby-head
@@ -19,8 +20,7 @@ matrix:
   allow_failures:
   - rvm: rbx-3
   - rvm: ruby-head
-  - rvm: jruby-18mode
-  - rvm: jruby-19mode
+  - rvm: jruby-head
 addons:
   apt:
     packages:
