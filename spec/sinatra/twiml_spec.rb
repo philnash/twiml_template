@@ -24,6 +24,6 @@ describe Sinatra::TwiML do
 
   it "renders simple template" do
     response = get("/hello")
-    response.body.strip.must_be_equivalent_xml(twiml_response)
+    expect(response.body).must_be_equivalent_xml(twiml_response)
   end
 end

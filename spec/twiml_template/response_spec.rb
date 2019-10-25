@@ -13,12 +13,12 @@ describe TwimlTemplate::Response do
 
       it 'generates successfully' do
         response.message(body: "Hello World!")
-        response.to_xml.must_be_equivalent_xml twiml
+        expect(response.to_xml).must_be_equivalent_xml twiml
       end
 
       [:message, :redirect].each do |verb|
         it "responds to #{verb}" do
-          response.must_respond_to(verb)
+          expect(response).must_respond_to(verb)
         end
       end
     end
@@ -33,7 +33,7 @@ describe TwimlTemplate::Response do
         response.message do |msg|
           msg.body "Hello World!"
         end
-        response.to_xml.must_be_equivalent_xml twiml
+        expect(response.to_xml).must_be_equivalent_xml twiml
       end
     end
 
@@ -46,7 +46,7 @@ describe TwimlTemplate::Response do
       it 'generates successfully' do
         response.message(body: "Hello World!")
         response.redirect("http://example.com")
-        response.to_xml.must_be_equivalent_xml twiml
+        expect(response.to_xml).must_be_equivalent_xml twiml
       end
     end
   end
@@ -60,12 +60,12 @@ describe TwimlTemplate::Response do
 
       it 'generates successfully' do
         response.say(message: "Hello World!")
-        response.to_xml.must_be_equivalent_xml twiml
+        expect(response.to_xml).must_be_equivalent_xml twiml
       end
 
       (TwimlTemplate::Response::MESSAGING_VERBS | TwimlTemplate::Response::VOICE_VERBS).each do |verb|
         it "responds to #{verb}" do
-          response.must_respond_to(verb)
+          expect(response).must_respond_to(verb)
         end
       end
     end
@@ -80,7 +80,7 @@ describe TwimlTemplate::Response do
         response.gather do |gather|
           gather.say message: "Hello World!"
         end
-        response.to_xml.must_be_equivalent_xml twiml
+        expect(response.to_xml).must_be_equivalent_xml twiml
       end
     end
 
@@ -93,31 +93,31 @@ describe TwimlTemplate::Response do
       it 'generates successfully' do
         response.say(message: "Hello World!")
         response.play(url: "http://tunes.com")
-        response.to_xml.must_be_equivalent_xml twiml
+        expect(response.to_xml).must_be_equivalent_xml twiml
       end
     end
   end
 
   describe 'with a mixed response' do
     it 'should raise an error' do
-      proc do
+      expect(proc do
         response.say(message: "Hello")
         response.message(" World!")
-      end.must_raise ArgumentError
+      end).must_raise ArgumentError
     end
 
     it 'should allow a redirect and a message' do
-      proc do
+      expect(proc do
         response.redirect("http://example.com")
         response.message(body: "Hello World!")
-      end.must_be_silent
+      end).must_be_silent
     end
 
     it 'should allow a redirect and a voice verb' do
-      proc do
+      expect(proc do
         response.redirect("http://example.com")
         response.say(message: "Hello World!")
-      end.must_be_silent
+      end).must_be_silent
     end
   end
 end
