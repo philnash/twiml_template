@@ -107,7 +107,7 @@ end
 And then add your TwiML view:
 
 ```ruby
-  twiml.say "Hello #{@name}"
+  twiml.say message: "Hello #{@name}"
 ```
 
 Save the file as `#{APP_ROOT}/views/voice.twiml`.
