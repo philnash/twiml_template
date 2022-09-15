@@ -1,3 +1,5 @@
+require 'twilio-ruby'
+
 module TwimlTemplate
   class Response
     MESSAGING_VERBS = [:message, :redirect]
@@ -15,19 +17,19 @@ module TwimlTemplate
       twiml_response.to_xml
     end
 
-    def method_missing(method, *args, &block)
+    def method_missing(method, *args, **kwargs, &block)
       if (respond_to?(method))
         if (MESSAGING_VERBS.include?(method) && @messaging_response)
           if ((MESSAGING_VERBS - VOICE_VERBS).include?(method))
             @voice_response = nil
           end
-          @messaging_response.send(method, *args, &block)
+          @messaging_response.send(method, *args, **kwargs, &block)
         end
         if (VOICE_VERBS.include?(method) && @voice_response)
           if ((VOICE_VERBS - MESSAGING_VERBS).include?(method))
             @messaging_response = nil
           end
-          @voice_response.send(method, *args, &block)
+          @voice_response.send(method, *args, **kwargs, &block)
         end
       else
         raise ArgumentError.new("Method `#{method}` doesn't exist.")
